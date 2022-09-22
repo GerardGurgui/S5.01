@@ -58,7 +58,6 @@ public class SucursalDTO implements Serializable {
         this.tipoSucursal = tipoSucursal;
     }
 
-
     public List<String> getListaPaises() {
         return listaPaises;
     }

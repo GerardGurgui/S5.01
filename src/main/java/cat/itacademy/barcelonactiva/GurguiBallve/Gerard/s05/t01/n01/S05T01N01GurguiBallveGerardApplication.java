@@ -20,28 +20,21 @@ public class S05T01N01GurguiBallveGerardApplication {
 
 		Sucursal sucursal = new Sucursal(1,"barceloning","Espanya");
 		Sucursal sucursal2 = new Sucursal(2,"holanding","Holanda");
-		Sucursal sucursal3 = new Sucursal(3,"argentining","Argentina");
+		Sucursal sucursal3 = new Sucursal(3,"bcn2","Espanya");
+		Sucursal sucursal4 = new Sucursal(4,"alem1","Alemania");
+		Sucursal sucursal5 = new Sucursal(5,"argent1","Argentina");
+		Sucursal sucursal6 = new Sucursal(6,"brasi1","Brasil");
+		Sucursal sucursal7 = new Sucursal(7,"holand2","Holanda");
+		Sucursal sucursal8 = new Sucursal(8,"bcn3","Espanya");
 
 		sucursalRepository.save(sucursal);
 		sucursalRepository.save(sucursal2);
 		sucursalRepository.save(sucursal3);
-
-		SucursalDTO sucursalDTO = sucursalService.convertSucursalToDto(sucursal);
-
-		System.out.println(sucursalDTO.getIdSucursal());
-		System.out.println(sucursalDTO.getPaisSucursal());
-		System.out.println(sucursalDTO.getNombreSucursal());
-		System.out.println(sucursalDTO.getTipoSucursal());
-
-		for (String listaPaise : sucursalDTO.getListaPaises()) {
-			System.out.println(listaPaise);
-		}
-
-
-		//CORRECTE CREC--> MOSTRAR INFO AMB LA DTO
-
-
-
+		sucursalRepository.save(sucursal4);
+		sucursalRepository.save(sucursal5);
+		sucursalRepository.save(sucursal6);
+		sucursalRepository.save(sucursal7);
+		sucursalRepository.save(sucursal8);
 
 	}
 

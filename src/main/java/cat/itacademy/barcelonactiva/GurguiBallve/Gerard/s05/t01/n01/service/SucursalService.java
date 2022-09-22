@@ -7,7 +7,6 @@ import cat.itacademy.barcelonactiva.GurguiBallve.Gerard.s05.t01.n01.models.Sucur
 
 
 import java.util.List;
-import java.util.Optional;
 
 public interface SucursalService {
 
@@ -34,11 +33,11 @@ public interface SucursalService {
 
     SucursalDTO update(SucursalDTO sucursalDTO, Integer id) throws SucursalNotFoundException, IdSucursalException;
 
-//    void deleteById(Integer id) throws SucursalNotFoundException;
-//
-//    void deleteAll(List<Sucursal> sucursales);
-//
-//    List<Sucursal> findListByCountry(String country);
+    void deleteOne(Integer id) throws SucursalNotFoundException;
+
+    void deleteAll();
+
+    List<SucursalDTO> findListByCountry(String country);
 
 
 

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /*
 * la capa servicio como hasta ahora, su función es implementar la lógica de la api
@@ -183,7 +182,8 @@ public class SucursalServiceImpl implements SucursalService {
 
         Optional<Sucursal> sucursalOpt = sucursalRepository.findById(id);
 
-        sucursalDtoNew = convertSucursalToDto(sucursalOpt.get());
+        sucursalOpt.get().setNombre(sucursalDtoNew.getNombreSucursal());
+        sucursalOpt.get().setPais(sucursalDtoNew.getPaisSucursal());
 
         sucursalRepository.save(sucursalOpt.get());
 
@@ -195,27 +195,40 @@ public class SucursalServiceImpl implements SucursalService {
     }
 
     //// ---- DELETE ----
-//
-//    @Override
-//    public void deleteById(Integer id) throws SucursalNotFoundException {
-//
-//        if (!sucursalRepository.existsById(id)){
-//
-//            throw new SucursalNotFoundException("La sucursal no existe");
-//
-//        }
-//
-//    }
-//
-//    @Override
-//    public void deleteAll(List<Sucursal> sucursales) {
-//
-//    }
-//
-//    @Override
-//    public List<Sucursal> findListByCountry(String country) {
-//        return null;
-//    }
-//
-//
+
+    @Override
+    public void deleteOne(Integer id) throws SucursalNotFoundException {
+
+        if (!sucursalRepository.existsById(id)){
+
+            throw new SucursalNotFoundException("La sucursal no existe");
+
+        }
+
+        sucursalRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+
+        sucursalRepository.deleteAll();
+    }
+
+    @Override
+    public List<SucursalDTO> findListByCountry(String country) {
+
+        List<SucursalDTO> listaSucursalesDto = findAll();
+
+        List<SucursalDTO> sucursalesPaisIndicado = new ArrayList<>();
+
+        for (SucursalDTO lista : listaSucursalesDto) {
+            if (lista.getPaisSucursal().equalsIgnoreCase(country)){
+                sucursalesPaisIndicado.add(lista);
+            }
+        }
+
+        return sucursalesPaisIndicado;
+    }
+
+
 }

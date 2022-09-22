@@ -14,24 +14,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sucursal")
-public class SucursalController implements ISucursalController {
+public class SucursalController  {
 
 
     @Autowired
     private SucursalService sucursalService;
 
-
-
     //// ---- GET -----
 
-    @Override
     @GetMapping("/findAll")
     public List<SucursalDTO> getSucursals() {
 
         return sucursalService.findAll();
     }
 
-    @Override
+
     @GetMapping("/findOne/{id}")
     public ResponseEntity<SucursalDTO> getOneSucursal(@PathVariable Integer id) throws SucursalNotFoundException {
 
@@ -39,10 +36,16 @@ public class SucursalController implements ISucursalController {
 
     }
 
+    @GetMapping("/getList/{country}")
+    public List<SucursalDTO> getListByCountry(@PathVariable String country){
+
+        return sucursalService.findListByCountry(country);
+
+    }
+
 
     //// ---- POST -----
 
-    @Override
     @PostMapping("/add")
     public ResponseEntity<SucursalDTO> addSucursal(@RequestBody SucursalDTO sucursalDTO) throws IdSucursalException {
 
@@ -52,7 +55,6 @@ public class SucursalController implements ISucursalController {
 
     //// ---- PUT ----
 
-    @Override
     @PutMapping("/update/{id}")
     public ResponseEntity<SucursalDTO> updateSucursal(@RequestBody SucursalDTO sucursalDTO,
                                                       @PathVariable Integer id)
@@ -66,6 +68,26 @@ public class SucursalController implements ISucursalController {
 
 
     //// ---- DELETE ----
+
+    @DeleteMapping("/deleteById/{id}")
+    public ResponseEntity deleteById(@PathVariable Integer id) throws SucursalNotFoundException {
+
+        sucursalService.deleteOne(id);
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity deleteAll(){
+
+        sucursalService.deleteAll();
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+
 
 
 }

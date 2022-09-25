@@ -18,10 +18,10 @@ public class SucursalDTO implements Serializable {
     private String nombreSucursal;
     private String paisSucursal;
     private String tipoSucursal;
-    private List<String> listaPaises;
+
 
     public SucursalDTO(){
-        listaPaises = new ArrayList<>();
+        super();
     }
 
     ////////
@@ -58,12 +58,5 @@ public class SucursalDTO implements Serializable {
         this.tipoSucursal = tipoSucursal;
     }
 
-    public List<String> getListaPaises() {
-        return listaPaises;
-    }
-
-    public void setListaPaises(List<String> listaPaises) {
-        this.listaPaises = listaPaises;
-    }
 
 }

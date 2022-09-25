@@ -12,14 +12,10 @@ public interface SucursalService {
 
     ////DTO
 
-     SucursalDTO convertSucursalToDto(Sucursal sucursal);
+    SucursalDTO convertSucursalToDto(Sucursal sucursal);
 
+    Sucursal convertDtoToSucursal(SucursalDTO sucursalDTO);
 
-     Sucursal convertDtoToSucursal(SucursalDTO sucursalDTO);
-
-     void addPaises(SucursalDTO sucursalDTO);
-
-     String validarPaisUE(SucursalDTO sucursalDTO, Sucursal sucursal);
 
 
 
@@ -38,7 +34,6 @@ public interface SucursalService {
     void deleteAll();
 
     List<SucursalDTO> findListByCountry(String country);
-
 
 
 }

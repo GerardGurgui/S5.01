@@ -28,6 +28,9 @@ public class SucursalServiceImpl implements SucursalService {
     @Autowired
     private SucursalRepository sucursalRepository;
 
+    @Autowired
+    private SucursalValidationCountry sucursalValidationCountry;
+
     ////DTO
     //Empaquetamos los objetos para enviar y recibir los DTO
         //CONVERSION DE ENTIDAD A DTO
@@ -41,9 +44,9 @@ public class SucursalServiceImpl implements SucursalService {
         sucursalDTO.setNombreSucursal(sucursal.getNombre());
         sucursalDTO.setPaisSucursal(sucursal.getPais());
 
-        addPaises(sucursalDTO);
+        List<String> UEcountries = sucursalValidationCountry.addUeCountries();
 
-        String paisComprobado = validarPaisUE(sucursalDTO, sucursal);
+        String paisComprobado = sucursalValidationCountry.validateUeCountry(UEcountries,sucursal);
         sucursalDTO.setTipoSucursal(paisComprobado);
 
         return sucursalDTO;
@@ -66,53 +69,14 @@ public class SucursalServiceImpl implements SucursalService {
     }
 
 
-    @Override
-    public String validarPaisUE(SucursalDTO sucursalDTO, Sucursal sucursal) {
-
-        String paisComprobado = "";
-        String pais;
-
-        boolean encontrado = false;
-        int i = 0;
-
-        while (i < sucursalDTO.getListaPaises().size() && !encontrado) {
-
-            pais = sucursalDTO.getListaPaises().get(i);
-
-            if (pais.equalsIgnoreCase(sucursal.getPais())) {
-
-                encontrado = true;
-                paisComprobado = "Pais de la UE";
-
-            }
-            i++;
-        }
-
-        if (!encontrado) {
-            paisComprobado = "Pais fuera de la UE";
-        }
-
-        return paisComprobado;
-    }
-
-
-    @Override
-    public void addPaises(SucursalDTO sucursalDTO) {
-
-        sucursalDTO.getListaPaises().add("Espanya");
-        sucursalDTO.getListaPaises().add("Holanda");
-        sucursalDTO.getListaPaises().add("Alemania");
-        sucursalDTO.getListaPaises().add("Italia");
-        sucursalDTO.getListaPaises().add("Francia");
-
-    }
-
 
     //// ---- CREATE -----
 
     @Override
     public SucursalDTO create(SucursalDTO sucursalDto) throws IdSucursalException {
 
+        //Convertimos a entidad sucursal para almacenar en BDD
+        //pero devolvemos la sucursalDTO
         Sucursal sucursalNew = convertDtoToSucursal(sucursalDto);
 
         if (sucursalNew.getId() != null){

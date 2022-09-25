@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Sucursales List</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Sucursals</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Index</th>
+                <th>Sucursal Name</th>
+                <th>Sucursal Country</th>
+                <th>UE/World</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="SucursalDTO : ${sucusDto}">
+                <td th:text="${SucursalDTOStat.index}"></td>
+                <td th:text="${SucursalDTO.nombreSucursal}"></td>
+                <td th:text="${SucursalDTO.paisSucursal}"></td>
+                <td th:text="${SucursalDTO.tipoSucursal}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+
+</html>

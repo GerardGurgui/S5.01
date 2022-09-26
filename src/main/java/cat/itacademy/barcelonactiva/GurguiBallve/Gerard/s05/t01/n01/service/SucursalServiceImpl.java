@@ -81,7 +81,7 @@ public class SucursalServiceImpl implements SucursalService {
 
         if (sucursalNew.getId() != null){
 
-            throw new IdSucursalException("el campo id no puede tener un valor al introducir una nueva sucursal");
+            throw new IdSucursalException("field id can't have a value when create a office");
 
         }
 
@@ -117,7 +117,7 @@ public class SucursalServiceImpl implements SucursalService {
 
         if (sucursalOpt.isEmpty()) {
 
-            throw new SucursalNotFoundException("No se encuentra la sucursal");
+            throw new SucursalNotFoundException("The office doesn't exist");
 
         }
 
@@ -133,19 +133,20 @@ public class SucursalServiceImpl implements SucursalService {
 
         if (id == null){
 
-            throw new IdSucursalException("El id de la sucursal a actualizar no puede ser nulo");
+            throw new IdSucursalException("the Id of the office to update can't be null");
 
         }
 
         if (!sucursalRepository.existsById(id)){
 
-            throw new SucursalNotFoundException("La sucursal no existe");
+            throw new SucursalNotFoundException("The office doesn't exist");
 
         }
 
 
         Optional<Sucursal> sucursalOpt = sucursalRepository.findById(id);
 
+        sucursalOpt.get().setId(id);
         sucursalOpt.get().setNombre(sucursalDtoNew.getNombreSucursal());
         sucursalOpt.get().setPais(sucursalDtoNew.getPaisSucursal());
 
@@ -165,7 +166,7 @@ public class SucursalServiceImpl implements SucursalService {
 
         if (!sucursalRepository.existsById(id)){
 
-            throw new SucursalNotFoundException("La sucursal no existe");
+            throw new SucursalNotFoundException("The office doesn't exist");
 
         }
 
@@ -177,6 +178,8 @@ public class SucursalServiceImpl implements SucursalService {
 
         sucursalRepository.deleteAll();
     }
+
+    ////---> FIND LIST BY COUNTRY
 
     @Override
     public List<SucursalDTO> findListByCountry(String country) {

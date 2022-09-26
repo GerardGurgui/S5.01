@@ -16,8 +16,6 @@ public class S05T01N01GurguiBallveGerardApplication {
 		ApplicationContext context = SpringApplication.run(S05T01N01GurguiBallveGerardApplication.class, args);
 		SucursalRepository sucursalRepository = context.getBean(SucursalRepository.class);
 
-		SucursalServiceImpl sucursalService = new SucursalServiceImpl();
-
 		Sucursal sucursal = new Sucursal(1,"barceloning","Espanya");
 		Sucursal sucursal2 = new Sucursal(2,"holanding","Holanda");
 		Sucursal sucursal3 = new Sucursal(3,"bcn2","Espanya");

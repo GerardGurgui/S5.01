@@ -29,30 +29,6 @@ public class FormularyController {
 
 
 
-//    @GetMapping("register")
-//    public String sucursalRegistration(Model model){
-//
-//        SucursalDTO sucursalDTO = new SucursalDTO();
-//        model.addAttribute("sucursalDTO", sucursalDTO);
-//
-//        List<String> paisesForm = Arrays.asList("Espanya", "Alemania", "Holanda", "Francia", "Italia");
-//        model.addAttribute("paisesForm",paisesForm);
-//
-//        return "register-form"; //devolvemos la vista, nombre del archivo html con su configuracion
-//
-//    }
-//
-//    @PostMapping("/register/save")
-//    public String submitForm(Model model,
-//                             @ModelAttribute("sucursalDTO") SucursalDTO sucursalDTO) throws IdSucursalException {
-//
-//        model.addAttribute("sucursalDTO",sucursalDTO);
-//
-//        sucursalService.create(sucursalDTO);
-//
-//        return "register-success";
-//    }
-
     @GetMapping("/sucursals")
     public String showAll(Model model){
 
@@ -102,15 +78,9 @@ public class FormularyController {
                                 @ModelAttribute("sucursal")Sucursal sucursal,
                                 Model model) throws SucursalNotFoundException, IdSucursalException {
 
-        //obtener sucursal existente de bdb
-        SucursalDTO existingSucursal = sucursalService.getOne(id);
-
-        existingSucursal.setIdSucursal(id);
-        existingSucursal.setNombreSucursal(sucursal.getNombre());
-        existingSucursal.setPaisSucursal(sucursal.getPais());
+        SucursalDTO existingSucursal = sucursalService.convertSucursalToDto(sucursal);
 
         sucursalService.update(existingSucursal, id);
-
 
         return "redirect:/sucursals";
 

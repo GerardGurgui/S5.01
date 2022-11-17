@@ -32,6 +32,7 @@ public class SucursalController  {
     @GetMapping("/findOne/{id}")
     public ResponseEntity<SucursalDTO> getOneSucursal(@PathVariable Integer id) throws SucursalNotFoundException {
 
+
         return ResponseEntity.ok(sucursalService.getOne(id));
 
     }
